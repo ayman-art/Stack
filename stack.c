@@ -4,7 +4,7 @@
 #define STACK_EMPTY -1111111
 
 typedef struct Node{
-    int data;
+    type data;
     struct Node* next;
 }Node;
 
@@ -46,14 +46,14 @@ void push(Stack stack, int data){
 }
 
 
-int pop(Stack stack){
+type pop(Stack stack){
    if(isEmpty(stack)){
         printf("The stack is Empty!\n");
         return STACK_EMPTY;
    }
     
 
-    int ret = stack->head->data;
+    type ret = stack->head->data;
     Node *temp = stack->head;
     stack->head = stack->head->next;
     free(temp);

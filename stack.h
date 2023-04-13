@@ -13,7 +13,7 @@ void destroy(Stack *stackptr);
 
 bool isEmpty(Stack stack);
 
-int pop(Stack stackptr);
+type pop(Stack stackptr);
 void push(Stack stackptr, int data);
 
 
