@@ -10,27 +10,24 @@ typedef struct Node{
 
 struct stackType{
     Node* head;
+    int size;
 };
 
 
-Stack createStack(Stack* stackptr){
-    if(stackptr == NULL)
-        return NULL;
-    Stack stack = *stackptr;
+Stack createStack(){
     
-    stack = malloc(sizeof(* stack));
+    Stack stack = malloc(sizeof(* stack));
     if(stack==NULL){
         printf("Error: can't create the stack");
         return NULL;
     }
 
     stack->head = NULL;
+    stack->size = 0;
     return stack;
 }
 
-void push(Stack stack, int data){
-    if(stack == NULL)
-        return;
+void push(Stack stack, type data){
    
     Node* new = malloc(sizeof(Node));
     if(new == NULL){
@@ -42,7 +39,7 @@ void push(Stack stack, int data){
     new->next = stack->head;
 
     stack->head=new;
-
+    ++stack->size;
 }
 
 
@@ -57,12 +54,13 @@ type pop(Stack stack){
     Node *temp = stack->head;
     stack->head = stack->head->next;
     free(temp);
+    stack->size--;
 
     return ret;
 
 }
 
-int peek(Stack stack){
+type peek(Stack stack){
 
     if(isEmpty(stack)){
         printf("Error: the stack is Empty!\n");
@@ -76,27 +74,21 @@ int peek(Stack stack){
 
 
 bool isEmpty(Stack stack){
-    if(stack == NULL){
-        printf("Error: stack is set to NULL");
-        return true;
-    }
+    
     return (stack->head == NULL);
 
 }
 
 
 void destroy(Stack *stackptr){
-    if(stackptr==NULL)
-        return;
+
     Stack stack = *stackptr;
     if(stack == NULL)
         return;
     
 
-    while(!isEmpty(stack)){
-        printf("%d\n",pop(stack));
-        
-    }
+    while(!isEmpty(stack))
+       pop(stack);
 
 
     free(stack);
@@ -104,3 +96,7 @@ void destroy(Stack *stackptr){
 
 }
 
+
+int size(Stack stack){
+    return stack->size;
+}
